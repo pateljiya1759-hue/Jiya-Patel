@@ -1,0 +1,185 @@
+{name: campus_activity_tracker
+description: "A comprehensive Flutter application for campus cultural, sports, clubs, and student activity tracking & reporting."
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+flutter:
+  uses-material-design: true
+    Club({
+    required this.id,
+    required this.name,
+    required this.category,
+    required this.description,
+    required this.leadStudent,
+    required this.facultyAdvisor,
+    required this.memberCount,
+    required this.meetingSchedule,
+    required this.venue,
+    required this.themeColor,
+    this.isJoined = false,
+    this.announcements = const [],
+  });
+  Club copyWith({
+    String? id,
+    String? name,
+    ClubCategory? category,
+    String? description,
+    String? leadStudent,
+    String? facultyAdvisor,
+    int? memberCount,
+    String? meetingSchedule,
+    String? venue,
+    Color? themeColor,
+    bool? isJoined,
+    List<ClubAnnouncement>? announcements,
+  }) {
+    {return Club(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      category: category ?? this.category,
+      description: description ?? this.description,
+      leadStudent: leadStudent ?? this.leadStudent,
+      facultyAdvisor: facultyAdvisor ?? this.facultyAdvisor,
+      memberCount: memberCount ?? this.memberCount,
+      meetingSchedule: meetingSchedule ?? this.meetingSchedule,
+      venue: venue ?? this.venue,
+      themeColor: themeColor ?? this.themeColor,
+      isJoined: isJoined ?? this.isJoined,
+      announcements: announcements ?? this.announcements,
+    );
+  }
+}     {{( attendedAt: attendedAt ?? this.attendedAt,
+      points: points ?? this.points,
+      qrToken: qrToken ?? this.qrToken,
+      certificateId: certificateId ?? this.certificateId,
+      notes: notes ?? this.notes,
+    );
+  }
+}
+import 'activity.dart';
+class Certificate {
+  final String id;
+  final String certificateNumber;
+  final String studentName;
+  final String rollNo;
+  final String department;
+  final String eventName;
+  final ActivityCategory category;
+  final String role;
+  final DateTime eventDate;
+  final DateTime issueDate;
+  final int pointsAwarded;
+  final String issuerName;
+  final String issuerDesignation;
+  final String campusName;
+  final String verificationHash;
+  Certificate({
+    required this.id,
+    required this.certificateNumber,
+    required this.studentName,
+    required this.rollNo,
+    required this.department,
+    required this.eventName,
+    required this.category,
+    required this.role,
+    required this.eventDate,
+    required this.issueDate,
+    required this.pointsAwarded,
+    this.issuerName = 'Dr. Rajeshwar Sharma',
+    this.issuerDesignation = 'Dean of Student Affairs & Extracurricular Activities',
+    this.campusName = 'Apex Institute of Technology & Arts',
+    required this.verificationHash,
+  });
+}     {( isJoined: newStatus,
+      memberCount: newStatus ? club.memberCount + 1 : club.memberCount - 1,
+    );
+    _recalculateStudentCredits();
+    return true;
+  }
+  Future<Certificate?> getCertificateById(String certId) async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    try {
+      return certificates.firstWhere((c) => c.id == certId);
+    } catch (_) {
+      return null;
+    }
+  }
+  Future<List<Certificate>> getStudentCertificates({String? studentName}) async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    final name = studentName ?? currentStudent.name;
+    return certificates.where((c) => c.studentName.toLowerCase() == name.toLowerCase()).toList();
+  }
+  Future<Activity> createActivity(Activity newActivity) async {
+    await Future.delayed(const Duration(milliseconds: 300));
+    activities.insert(0, newActivity);
+    return newActivity;
+  }
+  String md5LikeHash(String input) {
+    var hash = 0;
+    for (int i = 0; i < input.length; i++) {
+      hash = (hash << 5) - hash + input.codeUnitAt(i);
+      hash = hash & 0xFFFFFFF;
+    }
+    return hash.toRadixString(16).padLeft(16, '0') + Random().nextInt(0xFFFFF).toRadixString(16);
+  }
+}          fontWeight: FontWeight.w700,
+          letterSpacing: -0.5,
+        ),
+      ),
+      cardTheme: CardTheme(
+        color: surface,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: const BorderSide(color: divider, width: 1),
+        ),
+        margin: EdgeInsets.zero,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: primary,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          textStyle: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: primary,
+          side: const BorderSide(color: primary, width: 1.5),
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          textStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      chipTheme: ChipThemeData(
+        backgroundColor: const Color(0xFFF1F5F9),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      ),
+    );
+  }
+}
